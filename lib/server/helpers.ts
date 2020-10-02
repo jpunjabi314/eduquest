@@ -20,3 +20,13 @@ export const authenticate = (handler: (req: NextApiRequest, res: NextApiResponse
     await handler(req, res, user)
   }
 }
+
+interface Error {
+  status?: number,
+  message: string
+}
+export const sendError = (error: Error, req: NextApiRequest, res: NextApiResponse) => {
+  return res.status(error.status || 400).json({
+    message: error.message
+  })
+}

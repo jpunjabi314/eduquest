@@ -12,13 +12,26 @@ const Onboard: FC = () => {
   const register = async (isTeacher: boolean) => {
     await authedDataFetcher('/api/users/register', user, { teacher: isTeacher })
     useRedirect('/protected')
+  }
 
+  const joinClassroom = async (id: string) => {
+    await authedDataFetcher('/api/classrooms/join', user, {
+      token: id
+    })
+    useRedirect('/dashboard')
+  }
+
+  const newClassroom = async (name: string) => {
+    await authedDataFetcher('/api/classrooms/new', user, {
+      name: name
+    })
+    useRedirect('/dashboard')
   }
 
   return <>
     <h1>Are you a teacher or a student?</h1>
-    <button onClick={() => register(true)}>I'm a teacher</button>
-    <button onClick={() => register(false)}>I'm a student</button>
+    <button onClick={() => newClassroom("My name")}>Create a classroom</button>
+    <button onClick={() => joinClassroom('00e273')}>Join a classroom</button>
   </>
 }
 

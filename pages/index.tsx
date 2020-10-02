@@ -13,11 +13,10 @@ const Index: FC = () => {
     await loginWith(authProviders.google)()
     useRedirect('/onboard')
   }
-  
   return <>
     <h1>Landing Page</h1>
     <p>
-      THis is a website
+      This is a website
     </p>
     <button onClick={login}>Login with Google</button>
   </>
