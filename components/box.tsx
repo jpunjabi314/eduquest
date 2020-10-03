@@ -12,6 +12,7 @@ interface Props {
   p?: Spacing,
   maxWidth?: number,
   children: ReactNode,
+  cursor?: 'pointer' | 'auto' | 'help' | 'none'
   onClick: () => void
 }
 
@@ -23,6 +24,7 @@ const Box: FC<Props> = ({
   m = {},
   p = {},
   maxWidth,
+  cursor = 'auto',
   onClick
 }: Props) => (
   <>
@@ -38,6 +40,7 @@ const Box: FC<Props> = ({
         margin: ${generateSpacing(m)};
         padding: ${generateSpacing(p)};
         ${maxWidth ? `max-width: ${maxWidth}px;` : ''}
+        cursor: ${cursor};
       }
     `}</style>
   </>

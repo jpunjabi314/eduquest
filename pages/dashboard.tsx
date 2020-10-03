@@ -12,9 +12,7 @@ import Button from 'components/button'
 import Input from 'components/input'
 import { Classroom } from 'lib/isomorphic/types'
 import Dropdown from 'components/dropdown'
-import { loadGetInitialProps } from 'next/dist/next-server/lib/utils'
 import { authedDataFetcher } from 'lib/client/helpers'
-import { useRouter } from 'next/router'
 
 const Dashboard: FC = () => {
   const [ user, loading ] = useAuthState(firebase.auth())
@@ -37,12 +35,16 @@ const Dashboard: FC = () => {
     await authedDataFetcher('/api/classrooms/join', user, {
       token: id
     })
+    setShowJoinClassroom(false)
+    classes.revalidate()
   }
 
   const newClassroom = async (name: string) => {
     await authedDataFetcher('/api/classrooms/new', user, {
       name: name
     })
+    setShowCreateClassroom(false)
+    classes.revalidate()
   }
 
   if(loading) return <div>loading...</div>
@@ -98,17 +100,29 @@ a {
     </div>
   </nav>
   <Container>
-    <h3>Your classes</h3>
-    <div className="grid">
-      { classes.data ? [...classes.data.member, ...classes.data.owner].map(classroom => (
-        <Card 
-          title={classroom.name} 
-          subtitle={classroom.owner.name} 
-          description='450/500 points' 
-          link={`/class/${classroom.id}`}
-          key={classroom.id}
-        />
-      )) : ''}
+    <div> 
+    { classes.data && (classes.data.member.length > 0 || classes.data.owner.length > 0)? (
+      <>
+        <h3>Your classes</h3>
+        <div className="grid">
+          { [...classes.data.member, ...classes.data.owner].map(classroom => (
+            <Card 
+            title={classroom.name} 
+            subtitle={classroom.owner.name} 
+            description='450/500 points' 
+            link={`/class/${classroom.id}`}
+            key={classroom.id}
+            />
+            ))}
+        </div>
+      </>
+    ): (
+      <>
+        <h3>You don't have any classes yet, maybe try joining or adding one</h3>
+        <Button onClick={() => setShowCreateClassroom(true)}>Create a classroom</Button>
+        <Button onClick={() => setShowJoinClassroom(true)}>Join a classroom</Button>
+      </>
+    )}
       
     </div>
     <Modal 

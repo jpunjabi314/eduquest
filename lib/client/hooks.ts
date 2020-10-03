@@ -22,5 +22,7 @@ export const useRequireNoUser = (user: User | null, loading: boolean, redirect: 
 
 
 export const useAuthedData = <Type>(endpoint: string, user: User | null) => {
-  return useSWR<Type>([ endpoint, user ], authedDataFetcher)
+  return useSWR<Type>([ endpoint, user ], authedDataFetcher, {
+    revalidateOnFocus: false
+  })
 }

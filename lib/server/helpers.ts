@@ -1,6 +1,7 @@
 import admin from 'firebase-admin'
 import { NextApiRequest, NextApiResponse } from 'next'
 import firebase from 'lib/server/firebase'
+import { Classroom, SensoredClassroom } from 'lib/isomorphic/types'
 
 export const authenticate = (handler: (req: NextApiRequest, res: NextApiResponse, user: admin.auth.UserRecord) => Promise<void>) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
@@ -29,4 +30,12 @@ export const sendError = (error: Error, req: NextApiRequest, res: NextApiRespons
   return res.status(error.status || 400).json({
     message: error.message
   })
+}
+
+export const sensorClass = (classroom: Classroom): SensoredClassroom => {
+  return {
+    id: classroom.id,
+    owner: classroom.owner,
+    name: classroom.name
+  }
 }

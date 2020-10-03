@@ -1,7 +1,7 @@
-import { authenticate, sendError } from 'lib/server/helpers'
+import { authenticate, sendError, sensorClass } from 'lib/server/helpers'
 import firebase from 'lib/server/firebase'
+import { Classroom, SensoredClassroom } from 'lib/isomorphic/types'
 
-// import { firestore } from 'firebase/app'
 
 export default authenticate(async (req, res, user) => {
 
@@ -9,14 +9,12 @@ export default authenticate(async (req, res, user) => {
   const memberClassrooms = await classrooms.where('members', 'array-contains', user.uid).get()
   const ownedClassrooms = await classrooms.where('owner.uid', '==', user.uid).get()
 
-  console.log(ownedClassrooms.size)
-
   return res.status(200).json({
     member: memberClassrooms.docs.map(classroom => {
-      return classroom.data()
+      return sensorClass(classroom.data() as Classroom)
     }),
     owner: ownedClassrooms.docs.map(classroom => {
-      return classroom.data()
+      return classroom.data() as Classroom
     }),
   })
 })

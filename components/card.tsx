@@ -9,6 +9,7 @@ interface Props {
   subtitle?: string
   description?: string
   link?: string
+  maxWidth?: number
 }
 
 const Container: FC<Props> = ({
@@ -16,7 +17,8 @@ const Container: FC<Props> = ({
   title,
   subtitle,
   description,
-  link
+  link,
+  maxWidth
 }: Props) => {
   const router = useRouter();
   return <>
@@ -25,6 +27,8 @@ const Container: FC<Props> = ({
       fg="foreground" 
       p={{ x: 24, y: 36}} 
       onClick={() => link && router.push(link)}
+      cursor='pointer'
+      maxWidth={maxWidth}
     >
       {title ? <h3> {title} </h3> : ''}
       {subtitle ? <h4> {subtitle} </h4> : ''}
