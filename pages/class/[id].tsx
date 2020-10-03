@@ -6,25 +6,19 @@ import { useRedirect, useRequireNoUser } from 'lib/client/hooks'
 import { FC } from 'react'
 import Container from 'components/container'
 import Button from 'components/button'
+import { useRouter } from 'next/router'
 
-const Index: FC = () => {
+const ClassPage: FC = () => {
   const [ user, loading ] = useAuthState(firebase.auth())
-  useRequireNoUser(user, loading, '/dashboard')
+  const router = useRouter()
 
-  const login = async () => {
-    await loginWith(authProviders.google)()
-    useRedirect('/onboard')
-  }
+  const { id } = router.query; 
+
   return <>
   <Container>
-    <div className = "topnav"></div>
-    <h1>Educal</h1>
-    <p>
-      Your one stop for motivating students during online learning
-    </p>
-    <Button onClick={login}>Login with Google</Button>
+    <h1>Class Code: {id}</h1>
   </Container>
   </>
 }
 
-export default Index
+export default ClassPage

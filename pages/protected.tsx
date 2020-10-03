@@ -4,6 +4,7 @@ import { useRequireUser, useAuthedData } from 'lib/client/hooks'
 import { logout } from 'lib/client/helpers'
 
 import { FC } from 'react'
+import Button from 'components/button'
 
 const Protected: FC = () => {
   const [ user, loading ] = useAuthState(firebase.auth())
@@ -16,7 +17,7 @@ const Protected: FC = () => {
     <h1>Protected Page</h1>
     <p>You are logged in as {user.displayName}.</p>
     <p>{data.error ? `Error loading data: ${data.error.message}` : data.data?.message ?? 'Loading...'}</p>
-    <button onClick={logout}>Logout</button>
+    <Button onClick={logout}>Logout</Button>
   </>
 }
 

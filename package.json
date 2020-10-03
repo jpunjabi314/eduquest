@@ -5,6 +5,7 @@
   "author": "Andrew Kachnic (https://andrewkachnic.now.sh/)",
   "license": "MIT",
   "dependencies": {
+    "@icons-pack/react-simple-icons": "^3.10.0",
     "firebase": "^7.22.0",
     "firebase-admin": "^9.2.0",
     "nanoid": "^3.1.12",
@@ -13,6 +14,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-firebase-hooks": "^2.2.0",
+    "react-icons": "^3.11.0",
+    "react-transition-group": "^4.4.1",
     "swr": "^0.3.5",
     "water.css": "^2.0.0"
   },

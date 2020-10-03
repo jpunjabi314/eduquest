@@ -1,6 +1,7 @@
 import firebase from 'lib/client/firebase'
 
 import { User } from 'firebase'
+import { Spacing } from 'lib/client/types'
 
 
 export const loginWith = (provider: firebase.auth.AuthProvider) => async () => {
@@ -33,3 +34,34 @@ export const authedDataFetcher = async (endpoint: string, user: User | null, pay
 }
 
 export const logout = () => firebase.auth().signOut()
+
+export const generateSpacing = (space: Spacing) => {
+  const addPx = (a?: string | number) => a ? a + 'px' : null
+  let trbl = []
+  if(space.t) {
+    if(typeof space.t === 'number') trbl.push(space.t + 'px')
+    else { trbl.push(`var(--size-${space.t})`)}
+  } else {
+    trbl.push(addPx(space.y) || 0)
+  }
+  if(space.r) {
+    if(typeof space.r === 'number') trbl.push(space.r + 'px')
+    else { trbl.push(`var(--size-${space.r})`)}
+  } else {
+    trbl.push(addPx(space.x) || 0)
+  }
+  if(space.b) {
+    if(typeof space.b === 'number') trbl.push(space.b + 'px')
+    else { trbl.push(`var(--size-${space.b})`)}
+  } else {
+    trbl.push(addPx(space.y) || 0)
+  }
+  if(space.l) {
+    if(typeof space.l === 'number') trbl.push(space.l + 'px')
+    else { trbl.push(`var(--size-${space.l})`)}
+  } else {
+    trbl.push(addPx(space.x) || 0)
+  }
+
+  return trbl.reduce((acc, value) => `${acc} ${value}`)
+}
