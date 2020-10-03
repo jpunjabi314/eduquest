@@ -24,9 +24,3 @@ export const useRequireNoUser = (user: User | null, loading: boolean, redirect: 
 export const useAuthedData = <Type>(endpoint: string, user: User | null) => {
   return useSWR<Type>([ endpoint, user ], authedDataFetcher)
 }
-
-export const useRedirect = (redirect: string) => {
-  const router = useRouter()
-  
-  router.replace(redirect)
-}
