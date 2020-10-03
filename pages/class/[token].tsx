@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 
 import { useAuthedData } from 'lib/client/hooks'
 import { Classroom, SensoredClassroom } from 'lib/isomorphic/types'
+import { FullscreenLoader } from 'components/loader'
 
 const ClassPage: FC = () => {
   const [ user, loading ] = useAuthState(firebase.auth())
@@ -28,7 +29,7 @@ const ClassPage: FC = () => {
     router.push('/')
     return <></>
   } else {
-    return <div>loading</div>
+    return <FullscreenLoader />
   }
 }
 

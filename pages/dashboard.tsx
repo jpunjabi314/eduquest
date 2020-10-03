@@ -10,8 +10,10 @@ import Card from 'components/card'
 import Modal from 'components/modal'
 import Button from 'components/button'
 import Input from 'components/input'
-import { Classroom } from 'lib/isomorphic/types'
 import Dropdown from 'components/dropdown'
+import { FullscreenLoader } from 'components/loader'
+
+import { Classroom } from 'lib/isomorphic/types'
 import { authedDataFetcher } from 'lib/client/helpers'
 
 const Dashboard: FC = () => {
@@ -47,7 +49,7 @@ const Dashboard: FC = () => {
     classes.revalidate()
   }
 
-  if(loading) return <div>loading...</div>
+  if(loading) return <FullscreenLoader />
   return <>
   <style jsx>{`
 .topnav {

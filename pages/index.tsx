@@ -7,6 +7,7 @@ import { FC } from 'react'
 import Container from 'components/container'
 import Button from 'components/button'
 import { useRouter } from 'next/router'
+import { FullscreenLoader } from 'components/loader'
 
 const Index: FC = () => {
   const [ user, loading ] = useAuthState(firebase.auth())
@@ -18,6 +19,7 @@ const Index: FC = () => {
     await loginWith(authProviders.google)()
     router.push('/onboard')
   }
+  if(loading) return <FullscreenLoader />
   return <>
   <Container>
     <div className = "topnav"></div>

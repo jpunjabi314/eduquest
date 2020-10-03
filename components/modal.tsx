@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react'
-import Box from './box'
+import Box from 'components/box'
 
 interface Props {
   title: string,

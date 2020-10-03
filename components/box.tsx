@@ -13,7 +13,7 @@ interface Props {
   maxWidth?: number,
   children: ReactNode,
   cursor?: 'pointer' | 'auto' | 'help' | 'none'
-  onClick: () => void
+  onClick?: () => void
 }
 
 const Box: FC<Props> = ({
