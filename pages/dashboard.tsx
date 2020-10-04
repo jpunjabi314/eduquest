@@ -147,7 +147,6 @@ progress[value]::-ms-fill {
             <Card 
               title={classroom.name} 
               subtitle={classroom.owner.name} 
-              // description={`${classroom.points}/500 points`}
               link={`/class/${classroom.id}`}
               key={classroom.id}
             >
@@ -166,7 +165,7 @@ progress[value]::-ms-fill {
             <Card 
             title={classroom.name} 
             subtitle={classroom.owner.name} 
-            description={`You're very cool`}
+            description={`Join at ${classroom.id}`}
             link={`/class/${classroom.id}`}
             key={classroom.id}
             />
