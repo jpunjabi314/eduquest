@@ -111,7 +111,7 @@ progress[value]::-ms-fill {
 </style>
 
   <nav className="topnav">
-    <h2>Educal</h2>
+    <h2>educal</h2>
     <div className="options">
       <div className="dropdown" onClick={() => setShowAddMenu(!showAddMenu)}>
           <CgMathPlus size="1.5rem" />  

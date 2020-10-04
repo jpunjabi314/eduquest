@@ -25,7 +25,7 @@ const Index: FC = () => {
 
   if(loading) return <FullscreenLoader />
   return <>
-    <div className = "topnav"></div>
+    <h1 className="name">educal</h1>
     <div className="container">
     <section className="main">   
       <h1 className="title">Motivating students, one point at a time</h1>
@@ -39,6 +39,15 @@ const Index: FC = () => {
     </section>
     </div>
     <style jsx>{`
+      h1.name {
+        top: 12px;
+        left: 24px;
+        position: absolute;
+        margin:0;
+      }
+      h1 {
+        margin: 0;
+      }
       .container {
         display: grid;
         height: 100vh;
