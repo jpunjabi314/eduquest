@@ -6,13 +6,13 @@
   --color-background-alt: #151515;
   --color-background-light: #202020;
 
-  --color-accent: #68FF80;
+  --color-accent:#20c997;
 
   --color-none: none;
-  --size-sm: .75rem;
-  --size-md: 1rem;
-  --size-lg: 1.5rem;
-  --size-xl: 2rem;
+  --size-sm: .5rem;
+  --size-md: .75rem;
+  --size-lg: 1.25rem;
+  --size-xl: 1.5rem;
 }
 
 @media (prefers-color-scheme: light) {
@@ -23,5 +23,16 @@
     --color-background: #ffffff;
     --color-background-alt: #f1f1f1;
     --color-background-light: #cccccc;
+
+    --color-accent: #0ca678;
+  }
+}
+
+@media (min-width: 700px) {
+  :root {
+    --size-sm: .75rem;
+    --size-md: 1rem;
+    --size-lg: 1.5rem;
+    --size-xl: 2rem;
   }
 }

@@ -8,6 +8,7 @@ interface Props {
   bg?: Color,
   fg?: Color,
   fontSize?: Size,
+  fontWeight?: number
   m?: Spacing,
   p?: Spacing
   onClick?: MouseEventHandler,
@@ -19,6 +20,7 @@ const Button: FC<Props> = ({
   bg = "background-alt",
   fg = "foreground",
   fontSize = "md",
+  fontWeight = 500,
   m = {
     t: 4,
     r: 4,
@@ -42,6 +44,7 @@ const Button: FC<Props> = ({
         color: var(--color-${fg});
         background: var(--color-${bg});
         font-size: var(--size-${fontSize});
+        font-weight: ${fontWeight};
 
         margin: ${generateSpacing(m)};
         padding: ${generateSpacing(p)};
@@ -53,7 +56,7 @@ const Button: FC<Props> = ({
       }
 
       button:hover {
-        filter: brightness(1.5)
+        filter: brightness(1.1)
       }
     `}</style>
   </>

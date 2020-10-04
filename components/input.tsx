@@ -56,7 +56,7 @@ const Input: FC<Props> = ({
         padding: 8px 20px;
         border-radius: 8px;
         width: ${width};
-        ${ border ? `border: 2px #303030 solid` : ''}
+        ${ border ? `border: 2px rgba(100,100,100,.1) solid` : ''}
       }
       ::placeholder {
         user-select: none;

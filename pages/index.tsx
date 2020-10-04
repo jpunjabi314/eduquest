@@ -19,16 +19,61 @@ const Index: FC = () => {
     await loginWith(authProviders.google)()
     router.push('/dashboard')
   }
+  const viewDemo = () => {
+    router.push('https://devpost.com/software/educal-60krwf')
+  }
+
   if(loading) return <FullscreenLoader />
   return <>
-  <Container>
     <div className = "topnav"></div>
-    <h1>Educal</h1>
-    <p>
-      Your one stop for motivating students during online learning
-    </p>
-    <Button onClick={login}>Login with Google</Button>
-  </Container>
+    <div className="container">
+    <section className="main">   
+      <h1 className="title">Motivating students, one point at a time</h1>
+      <p className="description">
+      Educal allows you to create and join classrooms. From here, teachers can add points and students within those classes can eventually redeem those points for gift cards 
+      </p>
+      <div className="button-group">
+        <Button onClick={login} bg="accent" fg="background" fontWeight={700} fontSize="lg" p={{x: 32, y: 12}}>Try it out!</Button>
+        <Button onClick={viewDemo} bg="background-light" fontWeight={700} fontSize="lg" p={{x: 32, y: 12}}>View the demo</Button>
+      </div>
+    </section>
+    </div>
+    <style jsx>{`
+      .container {
+        display: grid;
+        height: 100vh;
+        margin: 0;
+      }
+      section.main {
+        user-select: none;
+        margin: auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      section.main > * {
+        margin: 12px 0;
+      }
+      h1.title {
+        font-size: 32px;
+        color: var(--color-accent);
+      }
+      p.description {
+        font-size: 16px;
+        max-width: 600px;
+      }
+
+      @media(min-width: 700px) {
+        h1.title {
+          font-size: 48px;
+          color: var(--color-accent);
+        }
+        p.description {
+          font-size: 20px;
+        }
+      }
+    `}</style>
   {/* 40a042 */}
   </>
 }
