@@ -16,6 +16,7 @@
     "react-firebase-hooks": "^2.2.0",
     "react-icons": "^3.11.0",
     "react-transition-group": "^4.4.1",
+    "sweetalert2": "^10.3.5",
     "swr": "^0.3.5",
     "water.css": "^2.0.0"
   },

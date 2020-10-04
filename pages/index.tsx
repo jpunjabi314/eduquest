@@ -17,7 +17,7 @@ const Index: FC = () => {
 
   const login = async () => {
     await loginWith(authProviders.google)()
-    router.push('/onboard')
+    router.push('/dashboard')
   }
   if(loading) return <FullscreenLoader />
   return <>
@@ -29,6 +29,7 @@ const Index: FC = () => {
     </p>
     <Button onClick={login}>Login with Google</Button>
   </Container>
+  {/* 40a042 */}
   </>
 }
 

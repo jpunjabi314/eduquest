@@ -3,6 +3,7 @@ import firebase from 'lib/client/firebase'
 import { User } from 'firebase'
 import { Spacing } from 'lib/client/types'
 
+import Swal from 'sweetalert2'
 
 export const loginWith = (provider: firebase.auth.AuthProvider) => async () => {
   const { user } = await firebase.auth().signInWithPopup(provider)
@@ -23,7 +24,14 @@ export const authedDataFetcher = async (endpoint: string, user: User | null, pay
   const text = await res.text()
 
   if (!res.ok) {
+    // TODO: Proper error handling
     throw new Error(`Error ${res.status}: ${text}`)
+    // try {
+    //   const message = JSON.parse(text).message || ""
+    //   sendMessage("Error: ", message, 'error')
+    // } catch {
+
+    // }
   }
 
   try {
@@ -64,4 +72,17 @@ export const generateSpacing = (space: Spacing) => {
   }
 
   return trbl.reduce((acc, value) => `${acc} ${value}`)
+}
+
+export const sendMessage = (title?: string, text?: string, kind: 'error' | 'warning' | 'success' = 'error') => {
+  Swal.fire({
+    title: title,
+    text: text,
+    icon: kind,
+    position: 'bottom-right',
+    background: 'var(--color-background-alt)',
+    toast: true,
+    showConfirmButton: false,
+    timer: 2500
+  })
 }

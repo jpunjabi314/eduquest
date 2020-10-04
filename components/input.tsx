@@ -1,5 +1,6 @@
 import { ChangeEvent, FC } from 'react'
 import Box from 'components/box'
+import { Color } from 'lib/client/types'
 
 type Props = {
   id: string
@@ -7,7 +8,11 @@ type Props = {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   label: string
   placeholder?: string
-  type?: 'text' | 'password'
+  type?: 'text' | 'password',
+  background?: Color
+  color?: Color
+  width?: string | number
+  border?: boolean
 }
 
 const Input: FC<Props> = ({
@@ -16,9 +21,13 @@ const Input: FC<Props> = ({
   value,
   onChange,
   label,
-  placeholder
+  placeholder,
+  background = "background-alt",
+  color = "foreground",
+  width = "100%",
+  border = false
 }: Props) => (
-  <Box>
+  <Box bg="none">
     <label htmlFor={id}>{label}</label>
     <input
       id={id}
@@ -34,17 +43,20 @@ const Input: FC<Props> = ({
         display: block;
         font-size: 1rem;
         font-weight: 600;
+        background: none;
       }
       input {
-        background: var(--bg-secondary);
-        color: var(--fg-primary);
+        background: var(--color-${background});
+        color: var(--color-${color});
         display: block;
         border: none;
         font-family: inherit;
         font-size: 1rem;
         font-weight: 400;
-        padding: 16px 20px;
+        padding: 8px 20px;
         border-radius: 8px;
+        width: ${width};
+        ${ border ? `border: 2px #303030 solid` : ''}
       }
       ::placeholder {
         user-select: none;

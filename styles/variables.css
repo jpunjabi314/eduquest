@@ -3,10 +3,12 @@
   --color-foreground-alt: #eeeeee;
 
   --color-background: #101010;
-  --color-background-alt: #202020;
+  --color-background-alt: #151515;
+  --color-background-light: #202020;
 
   --color-accent: #68FF80;
 
+  --color-none: none;
   --size-sm: .75rem;
   --size-md: 1rem;
   --size-lg: 1.5rem;

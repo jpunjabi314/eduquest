@@ -27,7 +27,7 @@ export default authenticate(async (req, res, user) => {
   if(classroom.members.includes(user.uid)) {
     return res.status(200).json({
       relation: 'student',
-      data: sensorClass(classroom)
+      data: sensorClass(classroom, user)
     })
   }
 

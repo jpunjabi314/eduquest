@@ -1,4 +1,4 @@
-export type Color = 'foreground' | 'foreground-alt' | 'background' | 'background-alt' | 'accent'
+export type Color = 'foreground' | 'foreground-alt' | 'background' | 'background-alt' | 'background-light' | 'accent' | 'none'
 export type Size = 'sm' | 'md' | 'lg' | 'xl'
 
 export type Spacing = {

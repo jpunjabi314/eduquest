@@ -27,7 +27,7 @@ const Container: FC<Props> = ({
       fg="foreground" 
       p={{ x: 24, y: 36}} 
       onClick={() => link && router.push(link)}
-      cursor='pointer'
+      cursor={link ? 'pointer' : 'auto'}
       maxWidth={maxWidth}
     >
       {title ? <h3> {title} </h3> : ''}

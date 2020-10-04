@@ -11,7 +11,7 @@ export default authenticate(async (req, res, user) => {
 
   return res.status(200).json({
     member: memberClassrooms.docs.map(classroom => {
-      return sensorClass(classroom.data() as Classroom)
+      return sensorClass(classroom.data() as Classroom, user)
     }),
     owner: ownedClassrooms.docs.map(classroom => {
       return classroom.data() as Classroom

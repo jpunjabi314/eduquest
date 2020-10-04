@@ -13,14 +13,18 @@ import Input from 'components/input'
 import Dropdown from 'components/dropdown'
 import { FullscreenLoader } from 'components/loader'
 
-import { Classroom } from 'lib/isomorphic/types'
-import { authedDataFetcher } from 'lib/client/helpers'
+import { Classroom, SensoredClassroom } from 'lib/isomorphic/types'
+import { authedDataFetcher, logout } from 'lib/client/helpers'
+import { sensorClass } from 'lib/server/helpers'
+import { useRouter } from 'next/router'
 
 const Dashboard: FC = () => {
   const [ user, loading ] = useAuthState(firebase.auth())
   useRequireUser(user, loading, '/')
   
   const [ showAddMenu, setShowAddMenu ] = useState(false)
+  const [ showProfileMenu, setShowProfileMenu ] = useState(false)
+
 
   const [showCreateClassroom, setShowCreateClassroom] = useState(false)
   const [createClassroomName, setCreateClassroomName] = useState('')
@@ -29,31 +33,34 @@ const Dashboard: FC = () => {
   const [joinClassroomCode, setJoinClassroomCode] = useState('')
 
   const classes = useAuthedData<{
-    member: Classroom[],
+    member: SensoredClassroom[],
     owner: Classroom[],
   }>('/api/classrooms/list', user)
 
   const joinClassroom = async (id: string) => {
+    setShowJoinClassroom(false)
     await authedDataFetcher('/api/classrooms/join', user, {
       token: id
     })
-    setShowJoinClassroom(false)
     classes.revalidate()
   }
 
   const newClassroom = async (name: string) => {
+    setShowCreateClassroom(false)
     await authedDataFetcher('/api/classrooms/new', user, {
       name: name
     })
-    setShowCreateClassroom(false)
     classes.revalidate()
   }
 
   if(loading) return <FullscreenLoader />
+
+
+  const router = useRouter()
+  if(!user) return <></>
   return <>
   <style jsx>{`
 .topnav {
-  overflow: hidden;
   background-color: var(--color-background-alt);
 
   display: grid;
@@ -80,26 +87,58 @@ a {
   gap: 12px;
   justify-content: flex-start;
 }
+
+div.dropdown {
+  position: relative;
+}
+
+progress {
+  background: var(--color-background);
+  border: none;
+  width: 75%;
+  height: 15px;
+}
+progress[value]::-webkit-progress-value {
+  background: var(--color-accent);
+}
+progress[value]::-moz-progress-bar {
+  background: var(--color-accent);
+}
+progress[value]::-ms-fill {
+  background: var(--color-accent);
+}
 `}
 </style>
 
   <nav className="topnav">
     <h2>Educal</h2>
     <div className="options">
-      <span onClick={() => setShowAddMenu(!showAddMenu)}>
-        <CgMathPlus size="1.5rem" />  
-      </span> 
-      <Dropdown items={[
-        {
-          label: "Join a class",
-          callback :() => setShowJoinClassroom(true)
-        },
-        {
-          label: "Create a class",
-          callback: () => setShowCreateClassroom(true)
-        }
-      ]} visible={showAddMenu}/>
-      <p>{ user.displayName }</p> 
+      <div className="dropdown" onClick={() => setShowAddMenu(!showAddMenu)}>
+          <CgMathPlus size="1.5rem" />  
+          <Dropdown items={[
+            {
+              label: "Join a class",
+              callback :() => setShowJoinClassroom(true)
+            },
+            {
+              label: "Create a class",
+              callback: () => setShowCreateClassroom(true)
+            }
+          ]} visible={showAddMenu} setVisible={setShowAddMenu}/>
+      </div>
+      <div className="dropdown" onClick={() => setShowProfileMenu(!showProfileMenu)}>
+          <p>{ user.displayName }</p> 
+          <Dropdown items={[
+            {
+              label: "Logout",
+              callback: logout
+            },
+            {
+              label: "Test",
+              callback: () => {}
+            }
+          ]} visible={showProfileMenu} setVisible={setShowProfileMenu}/>
+      </div>
     </div>
   </nav>
   <Container>
@@ -108,18 +147,37 @@ a {
       <>
         <h3>Your classes</h3>
         <div className="grid">
-          { [...classes.data.member, ...classes.data.owner].map(classroom => (
+          { classes.data.member.map(classroom => (
+            <Card 
+              title={classroom.name} 
+              subtitle={classroom.owner.name} 
+              // description={`${classroom.points}/500 points`}
+              link={`/class/${classroom.id}`}
+              key={classroom.id}
+            >
+              <>
+              <div className="progress">
+              <p>{Math.min(classroom.points, 500)}/500 points</p>
+              <progress value={classroom.points} max ={500}></progress>
+              </div>
+              { classroom.points >= 500 ? (
+                <Button bg="background-light" fg="accent" m={{y: 16}} onClick={() => router.push(`/class/${classroom.id}`)}>Redeem points!</Button>
+              ): ""}
+              </>
+            </Card>
+            ))}
+        { classes.data.owner.map(classroom => (
             <Card 
             title={classroom.name} 
             subtitle={classroom.owner.name} 
-            description='450/500 points' 
+            description={`You're very cool`}
             link={`/class/${classroom.id}`}
             key={classroom.id}
             />
             ))}
         </div>
       </>
-    ): (
+    ) : (
       <>
         <h3>You don't have any classes yet, maybe try joining or adding one</h3>
         <Button onClick={() => setShowCreateClassroom(true)}>Create a classroom</Button>
@@ -149,7 +207,7 @@ a {
       title="Join a classroom"
       visible={showJoinClassroom} 
       controls={
-        <Button onClick={() => joinClassroom(joinClassroomCode)}>Create!</Button>
+        <Button onClick={() => joinClassroom(joinClassroomCode)}>Join!</Button>
       }
       setVisible={()=> setShowJoinClassroom(false)}
     >

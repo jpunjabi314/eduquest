@@ -32,10 +32,17 @@ export const sendError = (error: Error, req: NextApiRequest, res: NextApiRespons
   })
 }
 
-export const sensorClass = (classroom: Classroom): SensoredClassroom => {
+export const sensorClass = (classroom: Classroom, user: admin.auth.UserRecord): SensoredClassroom => {
+  const points = classroom.complex.reduce<number>((acc, current) => {
+    if(current.uid === user.uid) return acc += current.points
+    return acc
+  }, 0)
+  console.log(points);
+  
   return {
     id: classroom.id,
     owner: classroom.owner,
-    name: classroom.name
+    name: classroom.name,
+    points
   }
 }
