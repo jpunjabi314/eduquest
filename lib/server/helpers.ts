@@ -37,7 +37,6 @@ export const sensorClass = (classroom: Classroom, user: admin.auth.UserRecord): 
     if(current.uid === user.uid) return acc += current.points
     return acc
   }, 0)
-  console.log(points);
   
   return {
     id: classroom.id,

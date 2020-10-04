@@ -28,7 +28,7 @@ const Loader: FC<Props> = ({
     .spinner {
       box-sizing: border-box;
       border: 2px solid transparent;
-      border-top: 2px solid white;
+      border-top: 2px solid var(--color-foreground);
       border-radius: 50%;
       width: 1.5em;
       height: 1.5em;

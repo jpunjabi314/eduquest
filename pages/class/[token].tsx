@@ -78,6 +78,7 @@ const ClassPage: FC = () => {
           kind
         })
         setRedeemedCard(card)
+        classroom.revalidate()
       }
 
       return <Container>
@@ -87,13 +88,13 @@ const ClassPage: FC = () => {
         <p>You have {(classroom.data.data as SensoredClassroom).points}/500 points</p>
         { (classroom.data.data as SensoredClassroom).points >= 500 ? 
         <>
-          <Button bg="background-light" fg="accent" m={{y: 16}} onClick={() => setShowRedeemModal(true)}>Redeem points!</Button>
+          <Button bg="background-light" fg="accent" m={{y: 16}} onClick={() => setShowRedeemModal(true)}>Redeem points...</Button>
         </> : 
         <p>{['Keep working at it!', 'Don\'t worry, you\'ll get there', 'You can do this!'][Math.floor(Math.random() * 3)]}</p>
         }
 
       <Modal 
-        title="Redeem a card?"
+        title="Redeem a card..."
         visible={showRedeemModal} 
         controls={''}
         setVisible={()=> setShowRedeemModal(false)}
@@ -107,9 +108,12 @@ const ClassPage: FC = () => {
           </ul>
         </> : <>
           <p>Your options are:</p>
+          <div>
           <Button onClick={() => redeemPoints('Amazon')}>Amazon</Button>
           <Button onClick={() => redeemPoints('Apple')}>Apple</Button>
           <Button onClick={() => redeemPoints('Visa')}>Visa</Button>
+          </div>
+          <small>disclamer: card numbers are for demonstration purposes only and don't function</small>
         </>}
       </Modal>
       </Container>

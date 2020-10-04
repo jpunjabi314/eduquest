@@ -12,7 +12,8 @@ interface Props {
   p?: Spacing,
   maxWidth?: number,
   children: ReactNode,
-  cursor?: 'pointer' | 'auto' | 'help' | 'none'
+  cursor?: 'pointer' | 'auto' | 'help' | 'none',
+  boxShadow?: string,
   onClick?: () => void
 }
 
@@ -25,6 +26,7 @@ const Box: FC<Props> = ({
   p = {},
   maxWidth,
   cursor = 'auto',
+  boxShadow,
   onClick
 }: Props) => (
   <>
@@ -41,6 +43,7 @@ const Box: FC<Props> = ({
         padding: ${generateSpacing(p)};
         ${maxWidth ? `max-width: ${maxWidth}px;` : ''}
         cursor: ${cursor};
+        ${boxShadow ? `box-shadow: ${boxShadow};` : ''}
       }
     `}</style>
   </>

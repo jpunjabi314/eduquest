@@ -14,3 +14,14 @@
   --size-lg: 1.5rem;
   --size-xl: 2rem;
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-foreground: #101010;
+    --color-foreground-alt: #202020;
+  
+    --color-background: #ffffff;
+    --color-background-alt: #f1f1f1;
+    --color-background-light: #cccccc;
+  }
+}

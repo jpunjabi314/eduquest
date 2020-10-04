@@ -132,10 +132,6 @@ progress[value]::-ms-fill {
             {
               label: "Logout",
               callback: logout
-            },
-            {
-              label: "Test",
-              callback: () => {}
             }
           ]} visible={showProfileMenu} setVisible={setShowProfileMenu}/>
       </div>

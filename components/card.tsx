@@ -25,6 +25,7 @@ const Container: FC<Props> = ({
     <Box 
       bg="background-alt" 
       fg="foreground" 
+      boxShadow="0px 3px 4px #10101030"
       p={{ x: 24, y: 36}} 
       onClick={() => link && router.push(link)}
       cursor={link ? 'pointer' : 'auto'}

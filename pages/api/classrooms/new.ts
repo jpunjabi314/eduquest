@@ -20,6 +20,7 @@ export default authenticate(async (req, res, user) => {
       uid: user.uid,
       name: user.displayName
     },
+    complex: [],
     members: []
   }))
 
