@@ -1,4 +1,4 @@
-# educal
+# eduquest
 
 > Motivating students, one point at a time
 
