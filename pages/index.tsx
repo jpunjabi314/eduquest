@@ -19,10 +19,6 @@ const Index: FC = () => {
     await loginWith(authProviders.google)()
     router.push('/dashboard')
   }
-  const viewDemo = () => {
-    router.push('https://devpost.com/software/educal-60krwf')
-  }
-
   if(loading) return <FullscreenLoader />
   return <>
     <h1 className="name">educal</h1>
@@ -34,7 +30,6 @@ const Index: FC = () => {
       </p>
       <div className="button-group">
         <Button onClick={login} bg="accent" fg="background" fontWeight={700} fontSize="lg" p={{x: 32, y: 12}}>Try it out!</Button>
-        <Button onClick={viewDemo} bg="background-light" fontWeight={700} fontSize="lg" p={{x: 32, y: 12}}>View the demo</Button>
       </div>
     </section>
     </div>

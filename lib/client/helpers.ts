@@ -26,10 +26,12 @@ export const authedDataFetcher = async (endpoint: string, user: User | null, pay
   if (!res.ok) {
     // TODO: Proper error handling
     throw new Error(`Error ${res.status}: ${text}`)
-    // try {
-    //   const message = JSON.parse(text).message || ""
-    //   sendMessage("Error: ", message, 'error')
-    // } catch {
+    /*
+    try {
+      const message = JSON.parse(text).message || ""
+      sendMessage("Error: ", message, 'error')
+      } catch {
+    */
 
     // }
   }

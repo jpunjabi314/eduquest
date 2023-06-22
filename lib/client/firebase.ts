@@ -10,7 +10,7 @@ if (firebase.apps.length === 0) {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: `${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.firebaseapp.com`,
     databaseURL: `https://${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.firebaseio.com`,
-    projectId: process.env.NEXT_PUBLIC_IREBASE_PROJECT_ID,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
     storageBucket: `${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.appspot.com`,
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
   })
