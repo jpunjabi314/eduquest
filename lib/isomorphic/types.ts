@@ -28,3 +28,8 @@ export interface GiftCard {
   pin: string
   kind: string
 }
+
+export interface Sweatshirt {
+  item: string
+  code: string
+}

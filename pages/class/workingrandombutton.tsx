@@ -14,8 +14,8 @@ import Modal from 'components/modal';
 import { format } from 'date-fns';
 import Drop from 'components/drop';
 import Randomwinner from 'components/randomwinner';
-import TopPoints from 'components/toppoints';
 import { saveAs } from 'file-saver';
+/*import { generateReport } from 'lib/reportgenerator';*/
 import { PDFDocument, StandardFonts } from 'pdf-lib';
 
 
@@ -194,18 +194,6 @@ const ClassPage: FC = () => {
           >
             Choose Random Winner!
           </Randomwinner>
-          <TopPoints
-            participants={(classroom.data.data as Classroom).complex}
-            fontSize="md"
-            fontWeight={500}
-            m={{ t: 2, r: 4, b: 2, l: 4 }}
-            p={{ t: 6, r: 12, b: 6, l: 12 }}
-          >
-            Choose Top Points Accumulation!
-          </TopPoints>
-
-
-
           <Button onClick={handleGenerateReport}>Generate Report</Button>
 
           <br />
