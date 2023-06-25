@@ -18,4 +18,4 @@ GCLOUD_CREDENTIALS
 
 ## credits:
 
-based off [this template]([https://github.com/stacc-dev/next-typescript-swr-watercss-serverless-firebase-auth-template](https://github.com/ajkachnic/ivyhacks)/).
+based off [this template]([https://github.com/stacc-dev/next-typescript-swr-watercss-serverless-firebase-auth-template])
